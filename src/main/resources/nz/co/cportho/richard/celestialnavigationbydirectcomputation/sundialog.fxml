@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.SunController" >
+    <headerText>
+        Fill in all fields below to enable a plot to be calculated.
+    </headerText>
+
+    <content>
+        <GridPane prefHeight="1000" prefWidth="600.0" BorderPane.alignment="CENTER">
+
+            <Label text="Celestial Body" value="Sun" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <padding>
+                    <Insets left="10.0" right="10.0" />
+                </padding>
+            </Label>
+            <TextField fx:id="tfCelestialBody"  prefHeight="26.0" prefWidth="162.0" value="Sun" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+<!--            <Label text="Limb" GridPane.columnIndex="0" GridPane.rowIndex="1">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <ChoiceBox fx:id="cbLimb" prefHeight="26.0" prefWidth="162.0" value="Lower" GridPane.columnIndex="1" GridPane.rowIndex="1">-->
+<!--                <items>-->
+<!--                    <FXCollections fx:factory="observableArrayList">-->
+<!--                        <String fx:value="Upper" />-->
+<!--                        <String fx:value="Lower" />-->
+<!--                    </FXCollections>-->
+<!--                </items>-->
+<!--            </ChoiceBox>-->
+
+<!--            <Label text="Bearing of body" GridPane.columnIndex="0" GridPane.rowIndex="2">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <ChoiceBox fx:id="cbBearing" prefHeight="26.0" prefWidth="162.0" value="North" GridPane.columnIndex="1" GridPane.rowIndex="2">-->
+<!--                <items>-->
+<!--                    <FXCollections fx:factory="observableArrayList">-->
+<!--                        <String fx:value="North" />-->
+<!--                        <String fx:value="South" />-->
+<!--                    </FXCollections>-->
+<!--                </items>-->
+<!--            </ChoiceBox>-->
+
+<!--            <Label text="Local Date" GridPane.columnIndex="0" GridPane.rowIndex="3">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <DatePicker fx:id="dpLocalDate" prefHeight="26.0" prefWidth="163.0" GridPane.columnIndex="1" GridPane.rowIndex="3">-->
+<!--            </DatePicker>-->
+
+<!--            <Label prefHeight="18.0" prefWidth="160.0" text="Local Hour:Minute:Second" GridPane.columnIndex="0" GridPane.rowIndex="4">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--                <HBox.margin>-->
+<!--                    <Insets top="5.0" />-->
+<!--                </HBox.margin>-->
+<!--            </Label>-->
+<!--            <HBox prefHeight="30.0" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="4">-->
+<!--                <children>-->
+<!--                    <Spinner fx:id="spHour" amountToStepBy="1" editable="true" initialValue="12" max="23" min="0" prefHeight="26.0" prefWidth="54.0" />-->
+<!--                    <Spinner fx:id="spMinute" amountToStepBy="1" editable="true" initialValue="30" max="60" min="0" prefHeight="26.0" prefWidth="54.0" />-->
+<!--                    <Spinner fx:id="spSecond" amountToStepBy="1" editable="true" initialValue="30" max="60" min="0" prefHeight="26.0" prefWidth="54.0" />-->
+<!--                </children>-->
+<!--            </HBox>-->
+
+<!--            <Label text="Local Time Zone" GridPane.rowIndex="7">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spTimeZone" amountToStepBy="1" editable="true" initialValue="0" max="13" min="-13" prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />-->
+
+<!--            <Label text="Clock Error" GridPane.rowIndex="8">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spClockError" amountToStepBy="1" editable="true" initialValue="0" max="300" min="-300"-->
+<!--                     prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Sextant Altitude" GridPane.rowIndex="10">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <TextField fx:id="tfSextantAltitude"  prefWidth="164.0" promptText="12 34.5" GridPane.columnIndex="1" GridPane.rowIndex="10"/>-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Eye Height (m)" GridPane.columnIndex="0" GridPane.rowIndex="11">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spEyeHeight" amountToStepBy="0.1" editable="true" initialValue="2.0" min="0.0" max="21.4"-->
+<!--                     prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="11" />-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Index Error" GridPane.columnIndex="0" GridPane.rowIndex="12">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spIndexError" amountToStepBy="0.1" editable="true" initialValue="0.0" min="-60.0" max="60.0"-->
+<!--                     prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12" />-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Temperature" GridPane.columnIndex="0" GridPane.rowIndex="13">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spTemperature" amountToStepBy="1.0" editable="true" initialValue="15.0" min="-40" max="50"-->
+<!--                     prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13" />-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Pressure" GridPane.columnIndex="0" GridPane.rowIndex="14">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <Spinner fx:id="spPressure" amountToStepBy="1.0" editable="true" initialValue="1013.0" min="920" max="1060"-->
+<!--                     prefHeight="26.0" prefWidth="164.0" BorderPane.alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14" />-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Latitude" GridPane.columnIndex="0" GridPane.rowIndex="15">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <HBox GridPane.columnIndex="1" GridPane.rowIndex="15">-->
+<!--                <TextField fx:id="tfLatitude"  prefWidth="120.0" promptText="12 34.5"/>-->
+<!--                <TextField fx:id="tfLatHemisphere" prefWidth="40.0" promptText="S"/>-->
+<!--            </HBox>-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Longitude" GridPane.columnIndex="0" GridPane.rowIndex="16">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <HBox GridPane.columnIndex="1" GridPane.rowIndex="16">-->
+<!--                <TextField fx:id="tfLongitude"  prefWidth="120.0" promptText="012 34.5"/>-->
+<!--                <TextField fx:id="tfLonHemisphere" prefWidth="40.0" promptText="E"/>-->
+<!--            </HBox>-->
+
+<!--            <Label prefHeight="28.0" prefWidth="160.0" text="Meridian Passage" GridPane.columnIndex="0" GridPane.rowIndex="17">-->
+<!--                <padding>-->
+<!--                    <Insets left="10.0" right="10.0" />-->
+<!--                </padding>-->
+<!--            </Label>-->
+<!--            <HBox GridPane.columnIndex="1" GridPane.rowIndex="17">-->
+<!--                <TextField fx:id="tfMeridianPassage"  prefWidth="120.0" promptText="12 34"/>-->
+<!--            </HBox>-->
+
+
+<!--            <Label text="GHA 0:" GridPane.columnIndex ="0" GridPane.RowIndex ="18"/>-->
+<!--            <TextField fx:id="tfGHA0" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="123 45.6"/>-->
+
+<!--            <Label text="GHA 1:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>-->
+<!--            <TextField fx:id="tfGHA1" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="123 45.6"/>-->
+
+<!--            <Label text="DEC 0:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
+<!--            <TextField fx:id="tfDec0" GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="01 23.4"/>-->
+
+<!--            <Label text="DEC 1:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>-->
+<!--            <TextField fx:id="tfDec1" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="01 23.4"/>-->
+
+<!--            <Label text="DEC Hemisphere:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>-->
+<!--            <TextField fx:id="tfDecHem" GridPane.rowIndex="4" GridPane.columnIndex="1" promptText="S"/>-->
+
+<!--            <Label text="SD:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>-->
+<!--            <TextField fx:id="tfSD" GridPane.rowIndex="5" GridPane.columnIndex="1" promptText="12.3"/>-->
+
+<!--            <TextField fx:id="tfCalculationResult" prefHeight="0.0" prefWidth="586.0" />-->
+        </GridPane>
+    </content>
+</DialogPane>
