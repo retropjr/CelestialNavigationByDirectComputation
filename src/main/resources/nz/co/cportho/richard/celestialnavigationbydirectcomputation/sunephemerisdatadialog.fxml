@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DialogPane?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+
+
+<DialogPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.SunEphemerisController" >
+    <headerText>
+       From appropriate Nautical Almanac page, enter...
+    </headerText>
+    <content>
+        <GridPane vgap="10" hgap="10">
+            <Label text="GHA 0:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfGHA0" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="123 45.6"/>
+
+            <Label text="GHA 1:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfGHA1" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="123 45.6"/>
+
+            <Label text="DEC 0:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfDec0" GridPane.rowIndex="2" GridPane.columnIndex="1" promptText="01 23.4"/>
+
+            <Label text="DEC 1:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfDec1" GridPane.rowIndex="3" GridPane.columnIndex="1" promptText="01 23.4"/>
+
+            <Label text="DEC Hemisphere:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfDecHem" GridPane.rowIndex="4" GridPane.columnIndex="1" promptText="S"/>
+
+            <Label text="SD:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfSD" GridPane.rowIndex="5" GridPane.columnIndex="1" promptText="12.3"/>
+        </GridPane>
+    </content>
+</DialogPane>
