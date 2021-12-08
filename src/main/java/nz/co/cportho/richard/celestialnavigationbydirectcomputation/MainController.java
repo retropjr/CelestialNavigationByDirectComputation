@@ -20,7 +20,7 @@ public class MainController {
     public void showSunLOPCalculation() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainPanel.getScene().getWindow());
-        dialog.setTitle("Add new contact");
+        dialog.setTitle("Enter Sun data");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("sundialog.fxml"));
         try {

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 public class SunController {
     @FXML
-    TextField tfCelestialBody;
+    ChoiceBox<FXCollections> cbBody;
     @FXML
     ChoiceBox<FXCollections> cbLimb;
     @FXML
@@ -50,6 +50,8 @@ public class SunController {
     @FXML
     TextField tfMeridianPassage;
     @FXML
+    TextField tfUTCSight;
+    @FXML
     private TextField tfGHA0;
     @FXML
     private TextField tfGHA1;
@@ -66,7 +68,7 @@ public class SunController {
 
 
     public SunData getSunData() {
-        String body = tfCelestialBody.getText();
+        String body = String.valueOf(cbBody.getValue());
         String limb = String.valueOf(cbLimb.getValue());
         String bearing = String.valueOf(cbBearing.getValue());
         LocalDate localDate = dpLocalDate.getValue();

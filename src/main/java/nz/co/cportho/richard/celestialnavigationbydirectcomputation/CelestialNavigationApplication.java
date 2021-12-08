@@ -11,7 +11,7 @@ public class CelestialNavigationApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CelestialNavigationApplication.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 100);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Celestial Navigation By Direct Computation");
         stage.setScene(scene);
         stage.show();

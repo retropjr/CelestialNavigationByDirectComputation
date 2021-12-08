@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
     <top>
-    <VBox prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+    <VBox prefHeight="400" prefWidth="600.0" BorderPane.alignment="CENTER">
         <children>
             <MenuBar prefHeight="20.0" prefWidth="600.0">
                 <menus>
-                    <Menu text="Line of Position">
+                    <Menu text="Line of Position (LOP)">
                             <items>
-                                <MenuItem text="Sun..." onAction="#showSunLOPCalculation"/>
+                                <MenuItem onAction="#showSunLOPCalculation" text="Calculate LOP Sun" />
                             </items>
                     </Menu>
-                    <Menu text="Calculations">
+                    <Menu text="Latitude">
                         <items>
-
-                            <MenuItem text="Calculate meridian passage (local)..." onAction="#calcMeridianPassage"/>
-                            <MenuItem text="Exit" onAction="#handleExit"  />
+                            <MenuItem onAction="#calcMeridianPassage" text="Sun meridian passage (local)..." />
+                        </items>
+                    </Menu>
+                    <Menu text="Program">
+                        <items>
+                            <MenuItem onAction="#handleExit" text="Exit" />
                         </items>
                     </Menu>
                 </menus>
@@ -38,8 +37,5 @@
         </children>
     </VBox>
     </top>
-   <center>
-
-   </center>
 
 </BorderPane>
