@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class MainController {
+
     @FXML
     BorderPane mainPanel;
-
 
     @FXML
     public void showSunLOPCalculation() {
@@ -40,23 +40,33 @@ public class MainController {
             SunController sunController = fxmlLoader.getController();
             SunData sunData = sunController.getSunData();
 
-//            Sight sight = new Sight(sunData.getBody, limb, localDate, hour, minute, second, timeZone, clockError, sextantAltitude);
-//            DRPosition drPosition = new DRPosition(latitude, latHemisphere, longitude, lonHemisphere);
-//            BasicEphemerisData basicEphemerisData = new BasicEphemerisData(sight.getTimeOfSightUTC(), sight.getCelestialBody(),
-//                        sight.getInterpolationFactor(), sunData.getGha0(), sunData.getGha1(), sunData.getDec0(), sunData.getDec1(), sunData.getDecHem(),
-//                        sunData.getSd());
-//            CalculatedAltitudeAndAzimuth calculatedAltitudeAndAzimuth = new CalculatedAltitudeAndAzimuth(basicEphemerisData.getGha(),
-//                        basicEphemerisData.getDec(), drPosition.getLatitude(), drPosition.getLongitude());
-//            HSextantToHObserved hSextantToHObserved = new HSextantToHObserved(eyeHeight, sight.getCelestialBody(), sight.getLimb(),
-//                        indexError, temperature, pressure, basicEphemerisData.getSemiDiameter(),
-//                        sight.getSextantAltitude());
-//            PositionLine positionLine = new PositionLine(drPosition.getdRLatitude(), drPosition.getdRLongitude(),
-//                        hSextantToHObserved.getObservedAltitude(), calculatedAltitudeAndAzimuth.getHC(),
-//                        calculatedAltitudeAndAzimuth.getZ());
-//            tfCalculationResult.setText(positionLine.getPlotString());
-//            }
+            Sight sight = new Sight(sunData.getBody(), sunData.getLimb(), sunData.getLocalDate(), sunData.getHour(), sunData.getMinute(),
+                            sunData.getSecond(), sunData.getTimeZone(), sunData.getClockError(), sunData.getSextantAltitude());
+            DRPosition drPosition = new DRPosition(sunData.getLatitude(), sunData.getLatHemisphere(),
+                            sunData.getLongitude(), sunData.getLonHemisphere());
+
+            sunController.showUTCSight(sight.getTimeOfSightUTC());
+            System.out.println(sight.getTimeOfSightUTC());
+
+            BasicEphemerisData basicEphemerisData = new BasicEphemerisData(sight.getTimeOfSightUTC(), sight.getCelestialBody(),
+                    sight.getInterpolationFactor(), sunData.getGHA0(), sunData.getGHA1(), sunData.getDec0(), sunData.getDec1(),
+                    sunData.getDecHem(), sunData.getSd());
+
+            CalculatedAltitudeAndAzimuth calculatedAltitudeAndAzimuth = new CalculatedAltitudeAndAzimuth(basicEphemerisData.getGha(),
+                    basicEphemerisData.getDec(), drPosition.getLatitude(), drPosition.getLongitude());
+            HSextantToHObserved hSextantToHObserved = new HSextantToHObserved(sunData.getEyeHeight(), sunData.getBody(),
+                    sunData.getLimb(), sunData.getIndexError(), sunData.getTemperature(), sunData.getPressure(),
+                    basicEphemerisData.getSemiDiameter(), sunData.getSextantAltitude());
+            PositionLine positionLine = new PositionLine(drPosition.getdRLatitude(), drPosition.getdRLongitude(),
+                    hSextantToHObserved.getObservedAltitude(), calculatedAltitudeAndAzimuth.getHC(),
+                    calculatedAltitudeAndAzimuth.getZ());
+
+            System.out.println(positionLine.getPlotString());
+            sunController.showPlot(positionLine.getPlotString());
+            }
         }
-    }
+
+
 
 
 

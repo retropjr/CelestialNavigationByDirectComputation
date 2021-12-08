@@ -12,45 +12,45 @@ import java.time.LocalDate;
 
 public class SunController {
     @FXML
-    ChoiceBox<FXCollections> cbBody;
+    private ChoiceBox<FXCollections> cbBody;
     @FXML
-    ChoiceBox<FXCollections> cbLimb;
+    private ChoiceBox<FXCollections> cbLimb;
     @FXML
-    ChoiceBox<FXCollections> cbBearing;
+    private ChoiceBox<FXCollections> cbBearing;
     @FXML
-    DatePicker dpLocalDate;
+    private DatePicker dpLocalDate;
     @FXML
-    Spinner<Integer> spHour;
+    private Spinner<Integer> spHour;
     @FXML
-    Spinner<Integer> spMinute;
+    private Spinner<Integer> spMinute;
     @FXML
-    Spinner<Integer> spSecond;
+    private Spinner<Integer> spSecond;
     @FXML
-    Spinner<Integer> spTimeZone;
+    private Spinner<Integer> spTimeZone;
     @FXML
-    Spinner<Integer> spClockError;
+    private Spinner<Integer> spClockError;
     @FXML
-    TextField tfSextantAltitude;
+    private TextField tfSextantAltitude;
     @FXML
-    Spinner<Double> spEyeHeight;
+    private Spinner<Double> spEyeHeight;
     @FXML
-    Spinner<Double> spIndexError;
+    private Spinner<Double> spIndexError;
     @FXML
-    Spinner<Double> spTemperature;
+    private Spinner<Double> spTemperature;
     @FXML
-    Spinner<Double> spPressure;
+    private Spinner<Double> spPressure;
     @FXML
-    TextField tfLatitude;
+    private TextField tfLatitude;
     @FXML
-    TextField tfLatHemisphere;
+    private TextField tfLatHemisphere;
     @FXML
-    TextField tfLongitude;
+    private TextField tfLongitude;
     @FXML
-    TextField tfLonHemisphere;
+    private TextField tfLonHemisphere;
     @FXML
-    TextField tfMeridianPassage;
+    private TextField tfMeridianPassage;
     @FXML
-    TextField tfUTCSight;
+    private TextField tfUTCSight;
     @FXML
     private TextField tfGHA0;
     @FXML
@@ -64,7 +64,7 @@ public class SunController {
     @FXML
     private TextField tfSD;
     @FXML
-    TextField tfCalculationResult;
+    private TextField tfCalculationResult;
 
 
     public SunData getSunData() {
@@ -91,9 +91,19 @@ public class SunController {
         String Dec0 = tfDec0.getText();
         String Dec1 = tfDec1.getText();
         String DecHem = tfDecHem.getText();
-        String SD = tfSD.getText();
+        String sd = tfSD.getText();
 
-        SunData sunData = new SunData(body);
+        SunData sunData = new SunData(body, limb, bearing, localDate, hour, minute, second, timeZone,
+                clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure, latitude, latHemisphere,
+                longitude, lonHemisphere, GHA0, GHA1, Dec0, Dec1, DecHem, sd);
         return sunData;
+    }
+
+    public void showUTCSight(String utc){
+        tfUTCSight.setText(utc);
+    }
+
+    public void showPlot(String plot){
+        tfCalculationResult.setText(plot);
     }
 }

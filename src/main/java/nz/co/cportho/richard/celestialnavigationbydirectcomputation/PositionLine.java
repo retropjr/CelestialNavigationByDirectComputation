@@ -35,10 +35,10 @@ public class PositionLine {
         azimuth = Math.round(azimuth);
 
         if (azimuth < 100) {
-            return "Plot: 0" + Double.toString(azimuth) + "T / " + Math.round((p * 100.00)) / 100.00 + "nm / " + direction;
+            return "0" + Double.toString(azimuth) + "T / " + Math.round((p * 100.00)) / 100.00 + "nm / " + direction;
         }
         else if (azimuth >= 100){
-            return "Plot: " + Double.toString(azimuth) + "T / " + Math.round((p * 100.00)) / 100.00 + "nm / " + direction;
+            return Double.toString(azimuth) + "T / " + Math.round((p * 100.00)) / 100.00 + "nm / " + direction;
         }
         return "No plot calculated";
     }
