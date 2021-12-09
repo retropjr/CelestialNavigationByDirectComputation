@@ -4,38 +4,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
     <top>
-    <VBox prefHeight="400" prefWidth="600.0" BorderPane.alignment="CENTER">
-        <children>
-            <MenuBar prefHeight="20.0" prefWidth="600.0">
-                <menus>
-                    <Menu text="Line of Position (LOP)">
-                            <items>
-                                <MenuItem onAction="#showSunLOPCalculation" text="Calculate LOP Sun" />
-                            </items>
-                    </Menu>
-                    <Menu text="Latitude">
-                        <items>
-                            <MenuItem onAction="#calcMeridianPassage" text="Sun meridian passage (local)..." />
-                        </items>
-                    </Menu>
-                    <Menu text="Program">
-                        <items>
-                            <MenuItem onAction="#handleExit" text="Exit" />
-                        </items>
-                    </Menu>
-                </menus>
+        <VBox prefHeight="400" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <MenuBar>
 
                 <padding>
-                    <Insets bottom="5.0" top="5.0" />
+                    <Insets bottom="5.0" top="5.0"/>
                 </padding>
                 <VBox.margin>
-                    <Insets top="0.0" />
+                    <Insets />
                 </VBox.margin>
+                <Menu text="Line of Position (LOP)">
+                    <MenuItem onAction="#showSunLOPCalculation" text="Calculate LOP Sun"/>
+                </Menu>
+                <Menu text="Latitude">
+                    <MenuItem onAction="#calcMeridianPassage" text="Sun meridian passage (local)..."/>
+                </Menu>
+                <Menu text="Program">
+                    <MenuItem onAction="#handleExit" text="Exit"/>
+                </Menu>
             </MenuBar>
-        </children>
-    </VBox>
+        </VBox>
     </top>
+
+    <center>
+        <HBox>
+            <Label text="UTC of Sight"/>
+            <TextField fx:id="tfResult"/>
+        </HBox>
+    </center>
 
 </BorderPane>

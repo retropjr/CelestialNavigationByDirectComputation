@@ -1,11 +1,14 @@
 package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 
-import datamodel.SunData;
+import datamodel.DRPosition;
+import datamodel.SunAlmanacData;
+import datamodel.SunSight;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -15,14 +18,21 @@ public class MainController {
 
     @FXML
     BorderPane mainPanel;
+    @FXML
+    TextField tfResult;
+
+    SunSight sunSight;
+    DRPosition drPosition;
+    SunAlmanacData sunAlmanacData;
 
     @FXML
     public void showSunLOPCalculation() {
+        //** Open a dialog to get sun sight data from user and create the SunSight instance **
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainPanel.getScene().getWindow());
         dialog.setTitle("Enter Sun data");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("sundialog.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("sunSight.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
@@ -38,36 +48,71 @@ public class MainController {
 
         if (result.isPresent() && result.get() == ButtonType.OK) {
             SunController sunController = fxmlLoader.getController();
-            SunData sunData = sunController.getSunData();
+            sunSight = sunController.getSunSightData();
 
-            Sight sight = new Sight(sunData.getBody(), sunData.getLimb(), sunData.getLocalDate(), sunData.getHour(), sunData.getMinute(),
-                            sunData.getSecond(), sunData.getTimeZone(), sunData.getClockError(), sunData.getSextantAltitude());
-            DRPosition drPosition = new DRPosition(sunData.getLatitude(), sunData.getLatHemisphere(),
-                            sunData.getLongitude(), sunData.getLonHemisphere());
+            tfResult.setText(sunSight.getTimeOfSightUTC());
+        }
 
-            sunController.showUTCSight(sight.getTimeOfSightUTC());
-            System.out.println(sight.getTimeOfSightUTC());
+        //** Open a dialog to get DR position from user and create the DRPosition instance **
+        dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter DR Position at " +  sunSight.getTimeOfSightUTC() + " UTC.");
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("drPosition.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
 
-            BasicEphemerisData basicEphemerisData = new BasicEphemerisData(sight.getTimeOfSightUTC(), sight.getCelestialBody(),
-                    sight.getInterpolationFactor(), sunData.getGHA0(), sunData.getGHA1(), sunData.getDec0(), sunData.getDec1(),
-                    sunData.getDecHem(), sunData.getSd());
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
-            CalculatedAltitudeAndAzimuth calculatedAltitudeAndAzimuth = new CalculatedAltitudeAndAzimuth(basicEphemerisData.getGha(),
-                    basicEphemerisData.getDec(), drPosition.getLatitude(), drPosition.getLongitude());
-            HSextantToHObserved hSextantToHObserved = new HSextantToHObserved(sunData.getEyeHeight(), sunData.getBody(),
-                    sunData.getLimb(), sunData.getIndexError(), sunData.getTemperature(), sunData.getPressure(),
-                    basicEphemerisData.getSemiDiameter(), sunData.getSextantAltitude());
-            PositionLine positionLine = new PositionLine(drPosition.getdRLatitude(), drPosition.getdRLongitude(),
+        Optional<ButtonType> result2 = dialog.showAndWait();
+
+        if (result2.isPresent() && result2.get() == ButtonType.OK) {
+            DRController DRController = fxmlLoader.getController();
+            drPosition = DRController.getDRPositionData();
+        }
+
+        //** Open a dialog to get Nautical Almanac data from user and create the SunAlmanacData instance **
+        dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter Nautical Almanac data for Sun at " +  sunSight.getTimeOfSightUTC() + " UTC.");
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("sunAlmanacData.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result3 = dialog.showAndWait();
+
+        if (result3.isPresent() && result3.get() == ButtonType.OK) {
+            SunAlmanacController sunAlmanacController = fxmlLoader.getController();
+            sunAlmanacData = sunAlmanacController.getSunAlmanacData(sunSight.getInterpolationFactor());
+        }
+
+        CalculatedAltitudeAndAzimuth calculatedAltitudeAndAzimuth = new CalculatedAltitudeAndAzimuth(sunAlmanacData.getGha(),
+                sunAlmanacData.getDec(), drPosition.getLatitude(), drPosition.getLongitude());
+        HSextantToHObserved hSextantToHObserved = new HSextantToHObserved(sunSight.getEyeHeight(), sunSight.getBody(),
+                   sunSight.getLimb(), sunSight.getIndexError(), sunSight.getTemperature(), sunSight.getPressure(),
+                   sunAlmanacData.getSemiDiameter(), sunSight.getSextantAltitude());
+        PositionLine positionLine = new PositionLine(drPosition.getdRLatitude(), drPosition.getdRLongitude(),
                     hSextantToHObserved.getObservedAltitude(), calculatedAltitudeAndAzimuth.getHC(),
                     calculatedAltitudeAndAzimuth.getZ());
 
-            System.out.println(positionLine.getPlotString());
-            sunController.showPlot(positionLine.getPlotString());
-            }
-        }
+        tfResult.setText("Plot: " + positionLine.getPlotString());
 
-
-
+    }
 
 
 

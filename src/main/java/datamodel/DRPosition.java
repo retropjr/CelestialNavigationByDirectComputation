@@ -1,6 +1,7 @@
-package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
+package datamodel;
 
 public class DRPosition {
+
     private String dRLatitude;
     private String dRLatHemisphere;
     private String dRLongitude;
@@ -73,3 +74,5 @@ public class DRPosition {
         return lon;
     }
 }
+
+

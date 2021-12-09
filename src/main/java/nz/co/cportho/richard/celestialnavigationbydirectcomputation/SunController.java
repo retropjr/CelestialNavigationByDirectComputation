@@ -1,6 +1,6 @@
 package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 
-import datamodel.SunData;
+import datamodel.SunSight;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -67,7 +67,7 @@ public class SunController {
     private TextField tfCalculationResult;
 
 
-    public SunData getSunData() {
+    public SunSight getSunSightData() {
         String body = String.valueOf(cbBody.getValue());
         String limb = String.valueOf(cbLimb.getValue());
         String bearing = String.valueOf(cbBearing.getValue());
@@ -82,28 +82,21 @@ public class SunController {
         double indexError = spIndexError.getValue();
         double temperature = spTemperature.getValue();
         double pressure = spPressure.getValue();
-        String latitude = tfLatitude.getText();
-        String latHemisphere = tfLatHemisphere.getText();
-        String longitude = tfLongitude.getText();
-        String lonHemisphere = tfLonHemisphere.getText();
-        String GHA0 = tfGHA0.getText();
-        String GHA1 = tfGHA1.getText();
-        String Dec0 = tfDec0.getText();
-        String Dec1 = tfDec1.getText();
-        String DecHem = tfDecHem.getText();
-        String sd = tfSD.getText();
+//        String latitude = tfLatitude.getText();
+//        String latHemisphere = tfLatHemisphere.getText();
+//        String longitude = tfLongitude.getText();
+//        String lonHemisphere = tfLonHemisphere.getText();
+//        String GHA0 = tfGHA0.getText();
+//        String GHA1 = tfGHA1.getText();
+//        String Dec0 = tfDec0.getText();
+//        String Dec1 = tfDec1.getText();
+//        String DecHem = tfDecHem.getText();
+//        String sd = tfSD.getText();
 
-        SunData sunData = new SunData(body, limb, bearing, localDate, hour, minute, second, timeZone,
-                clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure, latitude, latHemisphere,
-                longitude, lonHemisphere, GHA0, GHA1, Dec0, Dec1, DecHem, sd);
-        return sunData;
+        SunSight sunSightData = new SunSight(body, limb, bearing, localDate, hour, minute, second, timeZone,
+                clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure);
+
+        return sunSightData;
     }
 
-    public void showUTCSight(String utc){
-        tfUTCSight.setText(utc);
-    }
-
-    public void showPlot(String plot){
-        tfCalculationResult.setText(plot);
-    }
 }
