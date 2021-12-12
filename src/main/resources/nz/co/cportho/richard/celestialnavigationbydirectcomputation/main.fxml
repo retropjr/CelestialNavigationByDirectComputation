@@ -22,6 +22,9 @@
                     <MenuItem text="Calculate time of meridian passage" onAction="#calcMeridianPassage" />
                     <MenuItem text="Calculate latitude" onAction="#calcLatitude"/>
                 </Menu>
+                <Menu text="Sunrise/Sunset">
+                    <MenuItem text="Calculate time of Sunrise and Sunset" onAction="#calcSunriseSunset"/>
+                </Menu>
                 <Menu text="Program">
                     <MenuItem onAction="#handleExit" text="Exit" />
                 </Menu>

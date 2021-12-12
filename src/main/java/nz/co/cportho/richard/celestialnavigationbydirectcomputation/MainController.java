@@ -263,6 +263,65 @@ public class MainController {
     }
 
     @FXML
+    public void calcSunriseSunset(){
+
+        //** Open a dialog to get sight data from user and create the Sight instance **
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter local date and timezone.");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("sight.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            SightController sunController = fxmlLoader.getController();
+            sight = sunController.getSightData();
+        } else if (result.get() == ButtonType.CANCEL){
+            return;
+        }
+
+        //** Open a dialog to get DR position from user and create the DRPosition instance **
+        dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter position for time of sunrise and sunset calculation.");
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("drPosition.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result2 = dialog.showAndWait();
+
+        if (result2.isPresent() && result2.get() == ButtonType.OK) {
+            DRController DRController = fxmlLoader.getController();
+            drPosition = DRController.getDRPositionData();
+        }
+
+        SunriseSunset sunriseSunset = new SunriseSunset(sight.getDayLocal(), sight.getMonthLocal(), sight.getYearLocal(), sight.getTimeZoneLocal(),
+                drPosition.getLatitude(), drPosition.getLongitude());
+
+        tfResult.setText("Sunrise: " + sunriseSunset.getSunriseString() + " " + "Sunset: " + sunriseSunset.getSunsetString());
+    }
+
+    @FXML
     public void handleExit(){
         Platform.exit();
     }

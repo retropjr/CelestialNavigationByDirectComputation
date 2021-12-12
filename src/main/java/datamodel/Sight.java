@@ -150,6 +150,18 @@ public class Sight {
         return timeOfSightLocal;
     }
 
+    public String getDayLocal(){
+        return this.timeOfSightLocal.substring(0,2);
+    }
+
+    public String getMonthLocal(){
+        return this.timeOfSightLocal.substring(3,5);
+    }
+
+    public String getYearLocal(){
+        return this.timeOfSightLocal.substring(6,10);
+    }
+
     public String getTimeZoneLocal(){
         return String.valueOf(this.timeZone);
     }
