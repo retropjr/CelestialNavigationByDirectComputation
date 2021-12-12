@@ -1,10 +1,10 @@
 package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 
-import datamodel.SunAlmanacData;
+import datamodel.AlmanacData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class SunAlmanacController {
+public class AlmanacController {
 
     @FXML
     private TextField tfGHA0;
@@ -23,7 +23,7 @@ public class SunAlmanacController {
 
     double interpolationFactor;
 
-    public SunAlmanacData getSunAlmanacData(double interpolationFactor) {
+    public AlmanacData getSunAlmanacData(double interpolationFactor) {
         this.interpolationFactor = interpolationFactor;
         String GHA0 = tfGHA0.getText();
         String GHA1 = tfGHA1.getText();
@@ -33,8 +33,20 @@ public class SunAlmanacController {
         String sd = tfSD.getText();
         String meridianPassage = tfMeridianPassage.getText();
 
-        SunAlmanacData sunAlmanacData = new SunAlmanacData(GHA0, GHA1, Dec0, Dec1, DecHem, sd, meridianPassage, interpolationFactor);
+        AlmanacData sunAlmanacData = new AlmanacData(GHA0, GHA1, Dec0, Dec1, DecHem, sd, meridianPassage, interpolationFactor);
         return sunAlmanacData;
+    }
+
+    public AlmanacData getLatitudeAlmanacData(double interpolationFactor) {
+        this.interpolationFactor = interpolationFactor;
+        String Dec0 = tfDec0.getText();
+        String Dec1 = tfDec1.getText();
+        String DecHem = tfDecHem.getText();
+        String sd = tfSD.getText();
+       // String meridianPassage = tfMeridianPassage.getText();
+
+        AlmanacData latitudeAlmanacData = new AlmanacData(Dec0, Dec1, DecHem, sd, interpolationFactor);
+        return latitudeAlmanacData;
     }
 
 }

@@ -1,6 +1,6 @@
 package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 
-import datamodel.SunSight;
+import datamodel.Sight;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 
-public class SunController {
+public class SightController {
     @FXML
     private ChoiceBox<FXCollections> cbBody;
     @FXML
@@ -39,35 +39,9 @@ public class SunController {
     private Spinner<Double> spTemperature;
     @FXML
     private Spinner<Double> spPressure;
-    @FXML
-    private TextField tfLatitude;
-    @FXML
-    private TextField tfLatHemisphere;
-    @FXML
-    private TextField tfLongitude;
-    @FXML
-    private TextField tfLonHemisphere;
-    @FXML
-    private TextField tfMeridianPassage;
-    @FXML
-    private TextField tfUTCSight;
-    @FXML
-    private TextField tfGHA0;
-    @FXML
-    private TextField tfGHA1;
-    @FXML
-    private TextField tfDec0;
-    @FXML
-    private TextField tfDec1;
-    @FXML
-    private TextField tfDecHem;
-    @FXML
-    private TextField tfSD;
-    @FXML
-    private TextField tfCalculationResult;
 
 
-    public SunSight getSunSightData() {
+    public Sight getSightData() {
         String body = String.valueOf(cbBody.getValue());
         String limb = String.valueOf(cbLimb.getValue());
         String bearing = String.valueOf(cbBearing.getValue());
@@ -82,21 +56,12 @@ public class SunController {
         double indexError = spIndexError.getValue();
         double temperature = spTemperature.getValue();
         double pressure = spPressure.getValue();
-//        String latitude = tfLatitude.getText();
-//        String latHemisphere = tfLatHemisphere.getText();
-//        String longitude = tfLongitude.getText();
-//        String lonHemisphere = tfLonHemisphere.getText();
-//        String GHA0 = tfGHA0.getText();
-//        String GHA1 = tfGHA1.getText();
-//        String Dec0 = tfDec0.getText();
-//        String Dec1 = tfDec1.getText();
-//        String DecHem = tfDecHem.getText();
-//        String sd = tfSD.getText();
 
-        SunSight sunSightData = new SunSight(body, limb, bearing, localDate, hour, minute, second, timeZone,
-                clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure);
 
-        return sunSightData;
+            Sight sightData = new Sight(body, limb, bearing, localDate, hour, minute, second, timeZone,
+                    clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure);
+
+            return sightData;
     }
 
 }

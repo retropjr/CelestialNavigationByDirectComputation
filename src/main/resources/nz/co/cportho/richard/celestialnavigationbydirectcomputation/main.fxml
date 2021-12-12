@@ -4,37 +4,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.co.cportho.richard.celestialnavigationbydirectcomputation.MainController">
     <top>
         <VBox prefHeight="400" prefWidth="600.0" BorderPane.alignment="CENTER">
             <MenuBar>
 
                 <padding>
-                    <Insets bottom="5.0" top="5.0"/>
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
                 <VBox.margin>
                     <Insets />
                 </VBox.margin>
                 <Menu text="Line of Position (LOP)">
-                    <MenuItem onAction="#showSunLOPCalculation" text="Calculate LOP Sun"/>
+                    <MenuItem text="Calculate LOP Sun" onAction="#showSunLOPCalculation" />
                 </Menu>
                 <Menu text="Latitude">
-                    <MenuItem onAction="#calcMeridianPassage" text="Sun meridian passage (local)..."/>
+                    <MenuItem text="Calculate time of meridian passage" onAction="#calcMeridianPassage" />
+                    <MenuItem text="Calculate latitude" onAction="#calcLatitude"/>
                 </Menu>
                 <Menu text="Program">
-                    <MenuItem onAction="#handleExit" text="Exit"/>
+                    <MenuItem onAction="#handleExit" text="Exit" />
                 </Menu>
             </MenuBar>
+         <Label text="Result:" />
+         <TextField fx:id="tfResult" minWidth="200" />
         </VBox>
     </top>
 
-    <center>
-        <HBox>
-            <Label text="UTC of Sight"/>
-            <TextField fx:id="tfResult"/>
-        </HBox>
-    </center>
+
 
 </BorderPane>

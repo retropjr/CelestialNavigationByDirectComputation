@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class SunSight {
+public class Sight {
 
     private String body;
     private String limb;
@@ -25,9 +25,9 @@ public class SunSight {
     private double interpolationFactor;
 
 
-    public SunSight(String body, String limb, String bearing, LocalDate localDate, int hour, int minute, int second,
-                    int timeZone, int clockError, String sextantAltitude, double eyeHeight, double indexError,
-                    double temperature, double pressure) {
+    public Sight(String body, String limb, String bearing, LocalDate localDate, int hour, int minute, int second,
+                 int timeZone, int clockError, String sextantAltitude, double eyeHeight, double indexError,
+                 double temperature, double pressure) {
         this.body = body;
         this.limb = limb;
         this.bearing = bearing;
@@ -144,6 +144,14 @@ public class SunSight {
 
     public String getTimeOfSightUTC() {
         return timeOfSightUTC;
+    }
+
+    public String getTimeOfSightLocal(){
+        return timeOfSightLocal;
+    }
+
+    public String getTimeZoneLocal(){
+        return String.valueOf(this.timeZone);
     }
 
     public double getInterpolationFactor() {

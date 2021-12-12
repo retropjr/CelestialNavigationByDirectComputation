@@ -24,19 +24,19 @@ public class DRPosition {
         this.longitude = longitude(this.dRLongitude, this.dRLongHemisphere);
     }
 
-    public String getdRLatitude() {
+    public String getDRLatitude() {
         return dRLatitude;
     }
 
-    public String getdRLatHemisphere() {
+    public String getDRLatHemisphere() {
         return dRLatHemisphere;
     }
 
-    public String getdRLongitude() {
+    public String getDRLongitude() {
         return dRLongitude;
     }
 
-    public String getdRLongHemisphere() {
+    public String getDRLongHemisphere() {
         return dRLongHemisphere;
     }
 
