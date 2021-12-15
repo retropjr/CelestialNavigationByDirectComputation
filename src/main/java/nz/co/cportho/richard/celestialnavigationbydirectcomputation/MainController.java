@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class MainController {
     @FXML
     BorderPane mainPanel;
     @FXML
-    TextField tfResult;
+    TextArea taResult;
 
     Sight sight;
     DRPosition drPosition;
@@ -110,7 +110,7 @@ public class MainController {
                     hSextantToHObserved.getObservedAltitude(), calculatedAltitudeAndAzimuth.getHC(),
                     calculatedAltitudeAndAzimuth.getZ());
 
-        tfResult.setText("Plot: " + positionLine.getPlotString());
+        taResult.setText("Plot: " + positionLine.getPlotString());
 
     }
 
@@ -172,7 +172,7 @@ public class MainController {
         MeridianAltitude meridianAltitude = new MeridianAltitude(sight.getBody(), sight.getLimb(),
                 sight.getTimeOfSightLocal(), sight.getTimeZoneLocal(), drPosition.getLongitude());
 
-        tfResult.setText("Meridian Passage " + sight.getBody() + " local time: " + meridianAltitude.getPassageLocal());
+        taResult.setText("Meridian Passage " + sight.getBody() + " local time: " + meridianAltitude.getPassageLocal());
 
     }
 
@@ -258,7 +258,7 @@ public class MainController {
         HSextantToHObserved hSextantToHObserved = new HSextantToHObserved(sight.getEyeHeight(), sight.getBody(), sight.getLimb(),
                 sight.getIndexError(), sight.getTemperature(), sight.getPressure(), almanacData.getSemiDiameter(), sight.getSextantAltitude());
 
-        tfResult.setText("Latitude: " + meridianAltitude.calcLatitude(sight.getBearing(), hSextantToHObserved.getObservedAltitude(),
+        taResult.setText("Latitude: " + meridianAltitude.calcLatitude(sight.getBearing(), hSextantToHObserved.getObservedAltitude(),
                 almanacData.getDec()));
     }
 
@@ -318,7 +318,105 @@ public class MainController {
         SunriseSunset sunriseSunset = new SunriseSunset(sight.getDayLocal(), sight.getMonthLocal(), sight.getYearLocal(), sight.getTimeZoneLocal(),
                 drPosition.getLatitude(), drPosition.getLongitude());
 
-        tfResult.setText("Sunrise: " + sunriseSunset.getSunriseString() + " " + "Sunset: " + sunriseSunset.getSunsetString());
+        taResult.setText("Sunrise: " + sunriseSunset.getSunriseString() + " " + "Sunset: " + sunriseSunset.getSunsetString());
+    }
+
+    @FXML
+    public void starFinderSetUp(){
+
+        //** Open a dialog to get sight data from user and create the Sight instance **
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter local date and timezone.");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("sight.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            SightController sunController = fxmlLoader.getController();
+            sight = sunController.getSightData();
+        } else if (result.get() == ButtonType.CANCEL){
+            return;
+        }
+
+        //** Open a dialog to get DR position from user and create the DRPosition instance **
+        dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        dialog.setTitle("Enter position for time of sunrise and sunset calculation.");
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("drPosition.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result2 = dialog.showAndWait();
+
+        if (result2.isPresent() && result2.get() == ButtonType.OK) {
+            DRController DRController = fxmlLoader.getController();
+            drPosition = DRController.getDRPositionData();
+        }
+
+        SunriseSunset sunriseSunset = new SunriseSunset(sight.getDayLocal(), sight.getMonthLocal(), sight.getYearLocal(), sight.getTimeZoneLocal(),
+                drPosition.getLatitude(), drPosition.getLongitude());
+        StarFinderSetUp starFinderSetUp = new StarFinderSetUp(drPosition.getLongitude(), sight.getDayLocal(),
+                sight.getMonthLocal(), sight.getYearLocal(), sunriseSunset.getSunriseString(), sunriseSunset.getSunsetString(),
+                sight.getTimeZoneLocal(), sight.getIsMorning());
+
+        //** Open a dialog to get Nautical Almanac data from user and create the AlmanacData instance **
+        dialog = new Dialog<>();
+        dialog.initOwner(mainPanel.getScene().getWindow());
+        if(sight.getIsMorning()) {
+            dialog.setTitle("From Nautical Almanac enter GHA Aries " + starFinderSetUp.getTimeOfSightUTCMorning() + " UTC.");
+        } else {
+            dialog.setTitle("From Nautical Almanac enter GHA Aries " + starFinderSetUp.getTimeOfSightUTCEvening() + " UTC.");
+        }
+        fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("almanacData.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog.");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result3 = dialog.showAndWait();
+
+        if (result3.isPresent() && result3.get() == ButtonType.OK) {
+            AlmanacController almanacController = fxmlLoader.getController();
+            almanacData = almanacController.getAriesAlmanacData(sight.getInterpolationFactor());
+        }
+
+        LHAAries lhaAries = new LHAAries(drPosition.getLongitude(), almanacData.getGha());
+
+        if(sight.getIsMorning()) {
+            taResult.setText("Time of  star sight local: " + starFinderSetUp.getTimeOfSightLocalMorning() + " " +
+                    "LHA Aries at time of sight local: " + lhaAries.getLHAAriesString());
+        } else {
+            taResult.setText("Time of star sight local: " + starFinderSetUp.getTimeOfSightLocalEvening() + " " +
+                    "LHA Aries at time of sight local: " + lhaAries.getLHAAriesString());
+        }
     }
 
     @FXML

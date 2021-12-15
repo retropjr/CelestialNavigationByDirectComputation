@@ -2,8 +2,6 @@ package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 
 import java.util.Calendar;
 
-
-
 public class SunriseSunset {
 private double fractionalYear;
 private boolean isLeapYear;

@@ -3,10 +3,7 @@ package nz.co.cportho.richard.celestialnavigationbydirectcomputation;
 import datamodel.Sight;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 
@@ -25,6 +22,8 @@ public class SightController {
     private Spinner<Integer> spMinute;
     @FXML
     private Spinner<Integer> spSecond;
+    @FXML
+    private CheckBox cbMorning;
     @FXML
     private Spinner<Integer> spTimeZone;
     @FXML
@@ -49,6 +48,7 @@ public class SightController {
         int hour = spHour.getValue();
         int minute = spMinute.getValue();
         int second = spSecond.getValue();
+        boolean morning = cbMorning.isSelected();
         int timeZone = spTimeZone.getValue();
         int clockError = spClockError.getValue();
         String sextantAltitude = tfSextantAltitude.getText();
@@ -58,7 +58,7 @@ public class SightController {
         double pressure = spPressure.getValue();
 
 
-            Sight sightData = new Sight(body, limb, bearing, localDate, hour, minute, second, timeZone,
+            Sight sightData = new Sight(body, limb, bearing, localDate, hour, minute, second, morning, timeZone,
                     clockError, sextantAltitude, eyeHeight, indexError, temperature, pressure);
 
             return sightData;

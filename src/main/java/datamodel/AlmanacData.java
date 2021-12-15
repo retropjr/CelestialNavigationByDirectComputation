@@ -53,8 +53,18 @@ public class AlmanacData {
         //this.meridianPassage = meridianPassage;
     }
 
-
-
+    public AlmanacData(String gha0, String gha1, double interpolationFactor){
+        double ghaA = Double.parseDouble(gha0.substring(0,3)) + (Double.parseDouble(gha0.substring(4,8))/60.0);
+        double ghaB = Double.parseDouble(gha1.substring(0,3)) + (Double.parseDouble(gha1.substring(4,8))/60.0);
+        if (ghaB < ghaA){
+            ghaB += 360.0;
+        }
+        this.gha = ghaA + (interpolationFactor * (ghaB - ghaA));
+        if(this.gha > 360){
+            this.gha -= 360;
+        }
+        this.ghaString = String.valueOf(this.gha);
+    }
 
     public double getGha() {
         return gha;

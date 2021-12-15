@@ -63,6 +63,21 @@
             </padding>
             <TextField fx:id="tfMeridianPassage" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="12 34"/>
 
+            <HBox GridPane.columnIndex="0" GridPane.rowIndex="4">
+                <Label text="Aries GHA 0:">
+                    <padding>
+                        <Insets left="10.0" right="10.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="tfAriesGHA0" promptText="123 45.6"/>
+
+                <Label text="Aries GHA 1:" >
+                    <padding>
+                        <Insets left="10.0" right="10.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="tfAriesGHA1" promptText="123 45.6"/>
+            </HBox>
         </GridPane>
     </content>
 </DialogPane>

@@ -13,6 +13,7 @@ public class Sight {
     private int hour;
     private int minute;
     private int second;
+    private boolean morning;
     private int timeZone;
     private int clockError;
     private String sextantAltitude;
@@ -26,7 +27,7 @@ public class Sight {
 
 
     public Sight(String body, String limb, String bearing, LocalDate localDate, int hour, int minute, int second,
-                 int timeZone, int clockError, String sextantAltitude, double eyeHeight, double indexError,
+                 boolean morning, int timeZone, int clockError, String sextantAltitude, double eyeHeight, double indexError,
                  double temperature, double pressure) {
         this.body = body;
         this.limb = limb;
@@ -35,6 +36,7 @@ public class Sight {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
+        this.morning = morning;
         this.timeZone = timeZone;
         this.clockError = clockError;
         this.sextantAltitude = sextantAltitude;
@@ -160,6 +162,10 @@ public class Sight {
 
     public String getYearLocal(){
         return this.timeOfSightLocal.substring(6,10);
+    }
+
+    public boolean getIsMorning(){
+        return morning;
     }
 
     public String getTimeZoneLocal(){

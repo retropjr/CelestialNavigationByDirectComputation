@@ -25,12 +25,15 @@
                 <Menu text="Sunrise/Sunset">
                     <MenuItem text="Calculate time of Sunrise and Sunset" onAction="#calcSunriseSunset"/>
                 </Menu>
+                <Menu text="Set Up Star Finder">
+                    <MenuItem text="Set Up Star Finder" onAction="#starFinderSetUp"/>
+                </Menu>
                 <Menu text="Program">
                     <MenuItem onAction="#handleExit" text="Exit" />
                 </Menu>
             </MenuBar>
          <Label text="Result:" />
-         <TextField fx:id="tfResult" minWidth="200" />
+         <TextArea fx:id="taResult" minWidth="200" />
         </VBox>
     </top>
 

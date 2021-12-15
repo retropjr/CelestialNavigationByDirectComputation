@@ -86,6 +86,7 @@
                         <Spinner fx:id="spSecond" amountToStepBy="1" editable="true" initialValue="30" max="60" min="0" prefHeight="26.0" prefWidth="54.0" />
                     </children>
                 </HBox>
+                <CheckBox fx:id="cbMorning" text="Morning" selected="true"/>
             </HBox>
 
             <HBox GridPane.columnIndex="0" GridPane.rowIndex="2">

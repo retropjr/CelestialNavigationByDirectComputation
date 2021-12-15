@@ -20,6 +20,10 @@ public class AlmanacController {
     private TextField tfSD;
     @FXML
     private TextField tfMeridianPassage;
+    @FXML
+    private TextField tfAriesGHA0;
+    @FXML
+    private TextField tfAriesGHA1;
 
     double interpolationFactor;
 
@@ -47,6 +51,15 @@ public class AlmanacController {
 
         AlmanacData latitudeAlmanacData = new AlmanacData(Dec0, Dec1, DecHem, sd, interpolationFactor);
         return latitudeAlmanacData;
+    }
+
+    public AlmanacData getAriesAlmanacData(double interpolationFactor) {
+        this.interpolationFactor = interpolationFactor;
+        String AriesGHA0 = tfAriesGHA0.getText();
+        String AriesGHA1 = tfAriesGHA1.getText();
+
+        AlmanacData AriesAlmanacData = new AlmanacData(AriesGHA0, AriesGHA1, interpolationFactor);
+        return AriesAlmanacData;
     }
 
 }
